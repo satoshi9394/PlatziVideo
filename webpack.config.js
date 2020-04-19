@@ -11,6 +11,12 @@ module.exports ={
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  //cambiar el puerto del proyecto 
+  devServer: {
+    hot: true, // cambios en tiempo real
+    open: false, // abrir puerto
+    port: 3000, // juagar con el puerto 
+  },
   module: {
     rules: [
       {

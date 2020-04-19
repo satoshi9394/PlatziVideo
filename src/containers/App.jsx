@@ -1,10 +1,15 @@
 import React from 'react'
+//componentes
 import Header from '../components/Header'
+import Search from '../components/Search'
+
+//styles
 import '../assets/styles/App.scss'
 
 const App = () => (
   <div className="App">
     <Header/>
+    <Search/>
   </div>
 )
 
