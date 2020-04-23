@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 //componentes
 import Header from '../components/Header'
 import Search from '../components/Search'
@@ -12,50 +12,42 @@ import Footer from '../components/Footer'
 //styles
 import '../assets/styles/App.scss'
 
+//customeHoks
+import useInitialState from '../hooks/useInitialState' 
 
+const API = 'http://localhost:3000/initalState'
 
 const App = () =>{ 
-  const [ videos, setVideos ] = useState([])
+  const initialState = useInitialState(API);
 
-  useEffect(()=>{
-    fetch('http://localhost:3000/initalState')
-      .then( response => response.json())
-      .then( data => setVideos(data))
-  }, [])
-
-  console.log(videos)
   return(
     <div className="App">
       <Header/>
       <Search/>
-    
-      <Categories title="Mi lista">
-        <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-        </Carousel>
-      </Categories>
-
+      {
+        initialState.mylist.length > 0 &&
+        <Categories title="Mi lista">
+          <Carousel>
+            {initialState.mylist.map( item => 
+              <CarouselItem key={item.id} {...item}/>
+            )}
+          </Carousel>
+        </Categories>
+      }
+      
       <Categories title="Tendencias">
         <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
+          {initialState.trends.map( item => 
+            <CarouselItem key={item.id} {...item}/>
+          )}
         </Carousel>
       </Categories>
 
       <Categories title="Originales de Platzi Video">
         <Carousel>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
-          <CarouselItem/>
+          {initialState.originals.map( item =>
+            <CarouselItem key={item.id} {...item}/>
+          )}
         </Carousel>
       </Categories>
 
