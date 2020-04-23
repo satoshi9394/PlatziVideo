@@ -15,7 +15,7 @@ module.exports ={
   devServer: {
     hot: true, // cambios en tiempo real
     open: false, // abrir puerto
-    port: 3000, // juagar con el puerto 
+    port: 5000, // juagar con el puerto 
   },
   module: {
     rules: [
