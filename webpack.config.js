@@ -16,6 +16,7 @@ module.exports ={
     hot: true, // cambios en tiempo real
     open: false, // abrir puerto
     port: 5000, // juagar con el puerto 
+    historyApiFallback: true,
   },
   module: {
     rules: [
