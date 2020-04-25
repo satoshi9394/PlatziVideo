@@ -28,6 +28,7 @@ const App = () =>{
         initialState.mylist.length > 0 &&
         <Categories title="Mi lista">
           <Carousel>
+          {console.log(mylist)}
             {initialState.mylist.map( item => 
               <CarouselItem key={item.id} {...item}/>
             )}
