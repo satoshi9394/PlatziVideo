@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types' 
+import { Link } from 'react-router-dom'
+
 
 //redux
 import  { connect } from 'react-redux'
@@ -20,7 +22,8 @@ const CarouselItem = (props) =>  {
     title, 
     year, 
     contentRating, 
-    duration
+    duration,
+    isList
   } = props
 
   const HandleSetFavorite = () => {
@@ -41,23 +44,27 @@ const CarouselItem = (props) =>  {
       <img className="carousel-item__img" src={cover} alt={title}  />
       <div className="carousel-item__details">
         <div>
-          <img 
-            className="carousel-item__details--img" 
-            src={playIcon} 
-            alt="Play Icon"
-          /> 
-          <img 
-            className="carousel-item__details--img" 
-            src={plusIcon} 
-            alt="Plus Icon"
-            onClick={HandleSetFavorite} 
-          />
-          <img 
-            className="carousel-item__details--img" 
-            src={deleteIcon} 
-            alt="Delete Icon"
-            onClick={()=>handleDeleteFavorite(id)} 
-          />  
+          <Link to={`/player/${id}`}>
+            <img 
+              className="carousel-item__details--img" 
+              src={playIcon} 
+              alt="Play Icon"
+            />
+          </Link>
+          {isList ? 
+            <img 
+              className="carousel-item__details--img" 
+              src={deleteIcon} 
+              alt="Delete Icon"
+              onClick={()=>handleDeleteFavorite(id)} 
+            /> :
+            <img 
+              className="carousel-item__details--img" 
+              src={plusIcon} 
+              alt="Plus Icon"
+              onClick={HandleSetFavorite} 
+            />
+          }
         </div>
         <p className="carousel-item__details--title">{title}</p>
         <p className="carousel-item__details--subtitle">
