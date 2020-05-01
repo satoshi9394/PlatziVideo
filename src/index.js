@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, compose } from 'redux'
 
 import reducer from './store/reducers/index'
 
@@ -174,7 +174,8 @@ const initialState = {
     ]
 }
 
-const store = createStore(reducer, initialState);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() || compose 
+const store = createStore(reducer, initialState, composeEnhancers);
 
 ReactDom.render(
   <Provider store={store}>
