@@ -1,10 +1,16 @@
 const path = require('path');
+const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+
 module.exports ={
-  entry: './src/index.js',
-  output: {
+  entry: [
+    './src/frontend/index.js',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true'
+  ],
+  mode: 'development',
+    output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/',
@@ -12,13 +18,14 @@ module.exports ={
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  //cambiar el puerto del proyecto 
-  devServer: {
+  //cambiar el puerto del proyecto
+  //no se requiere despues de cambiar a sider-render 
+  /*devServer: {
     hot: true, // cambios en tiempo real
     open: false, // abrir puerto
     port: 5000, // juagar con el puerto 
     historyApiFallback: true,
-  },
+  },*/
   module: {
     rules: [
       {
@@ -60,6 +67,7 @@ module.exports ={
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
       template: './public/index.html',
       filename: './index.html'
@@ -67,5 +75,5 @@ module.exports ={
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css'
     }),
-  ]
+  ],
 }

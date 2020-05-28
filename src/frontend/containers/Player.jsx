@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import NotFound from '../containers/NotFound'
+import NotFound from './NotFound'
 
 //redux
 import { connect } from 'react-redux'
