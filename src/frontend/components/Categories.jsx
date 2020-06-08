@@ -1,6 +1,5 @@
-import React from 'react'
-
-import '../assets/styles/components/Categories.scss'
+import React from 'react';
+import '../assets/styles/components/Categories.scss';
 
 const Categories = ({ children, title }) => (
   <div className="categories">
@@ -9,4 +8,4 @@ const Categories = ({ children, title }) => (
   </div>
 );
 
-export default Categories
+export default Categories;

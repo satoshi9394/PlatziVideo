@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react';
 
 const NotFound = () => (
-  <Fragment>
-    <h1>No encontrada la Routa</h1>
-    <h1>Regresa a Home</h1>
-  </Fragment>
+  <>
+    <h1>No Encontrado</h1>
+    <h2>Regresa al Home</h2>
+  </>
 );
 
-export default NotFound
+export default NotFound;

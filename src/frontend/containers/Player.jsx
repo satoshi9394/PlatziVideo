@@ -1,34 +1,28 @@
-import React, {useEffect} from 'react'
-import NotFound from './NotFound'
-
-//redux
-import { connect } from 'react-redux'
-import { getVideoSource } from '../store/action'
-//styles
-import '../assets/styles/components/Player.scss'
-
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getVideoSource } from '../actions';
+import '../assets/styles/components/Player.scss';
+import NotFound from '../containers/NotFound';
 
 const Player = props => {
   const { id } = props.match.params;
   const hasPlaying = Object.keys(props.playing).length > 0;
-
   useEffect(() => {
-    props.getVideoSource(id)
+    props.getVideoSource(id);
   }, []);
-
   return hasPlaying ? (
     <div className="Player">
       <video controls autoPlay>
-        <source src={props.playing.source} type="video/mp4"/>
+        <source src={props.playing.source} type="video/mp4" />
       </video>
       <div className="Player-back">
-        <button type="button" onClick={ () => props.history.goBack()}>
+        <button type="button" onClick={() => props.history.goBack()}>
           Regresar
         </button>
       </div>
     </div>
-  ) : <NotFound/>;
-}
+  ) : <NotFound />;
+};
 
 const mapStateToProps = state => {
   return {
@@ -37,7 +31,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  getVideoSource,
+  getVideoSource, 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

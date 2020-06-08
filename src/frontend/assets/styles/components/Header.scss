@@ -1,14 +1,16 @@
-@import "../Vars.scss";
-
 .header {
   align-items: center;
-  background: $header-footer-color;
+  background: #009688;
   color: white;
   display: flex;
   height: 100px;
   justify-content: space-between;
   top: 0px;
   width: 100%;
+}
+
+.isLogin, .isRegister {
+  background-color: #21c08b;
 }
 
 .header__img {
