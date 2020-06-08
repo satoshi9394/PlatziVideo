@@ -17,6 +17,7 @@ dotenv.config();
 
 const { ENV, PORT } = process.env;
 const app = express();
+console.log(ENV, PORT)
 
 if (ENV === 'development') {
   console.log('Development config');
@@ -29,6 +30,7 @@ if (ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
 } else {
+  console.log('entre a production')
   app.use(express.static(`${__dirname}/public`));
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
@@ -72,5 +74,5 @@ app.get('*', renderApp);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  else console.log('Server running on port 3000');
+  else console.log(`Server running on port ${PORT}`);
 });
