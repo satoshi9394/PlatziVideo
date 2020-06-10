@@ -3,6 +3,10 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin')
+
+//limpiar los archivos de los hash
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 
 
@@ -21,7 +25,7 @@ module.exports = {
   mode: process.env.ENV,
   output: {
     path: path.resolve(__dirname, 'src/server/public'),
-    filename: 'assets/app.js',
+    filename: isDev ? 'assets/app.js': 'assets/app-[hash].js'  ,
     publicPath: '/',
   },
   resolve: {
@@ -30,6 +34,24 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: 'async',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          chunks: 'all',
+          reuseExistingChunk: true,
+          priority: 1,
+          filename: isDev ? 'assets/vendor.js': 'assets/vendor-[hash].js',
+          enforce: true,
+          test(module, chunks) {
+            const name = module.nameForCondition && module.nameForCondition();
+            return chunks.some(chunk => chunk.name !== 'vendors' && /[\\/]node_modules[\\/]/.test(name));
+          }
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -74,8 +96,14 @@ module.exports = {
         test: /\.js$|\.css$/,
         filename: '[path].gz',
       }),
+    isDev ? () => {} :
+      new ManifestPlugin(),
+    isDev ? () => {}
+      : new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public')
+      }),    
     new MiniCssExtractPlugin({
-      filename: 'assets/app.css',
+      filename: isDev ? 'assets/app.css' :'assets/app-[hash].css',
     }),
   ],
 };
