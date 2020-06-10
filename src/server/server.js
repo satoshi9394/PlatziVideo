@@ -12,13 +12,13 @@ import { StaticRouter } from 'react-router-dom';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import reducer from '../frontend/reducers';
 import initialState from '../frontend/initialState';
-import getManifest from './getManifest'
+import getManifest from './getManifest';
 
 dotenv.config();
 
 const { ENV, PORT } = process.env;
 const app = express();
-console.log(ENV, PORT)
+console.log(ENV, PORT);
 
 if (ENV === 'development') {
   console.log('Development config');
@@ -31,11 +31,11 @@ if (ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
 } else {
-  console.log('entre a production')
+  console.log('entre a production');
   app.use((req, res, next) => {
-    if(!req.hashManifest) req.hashManifest = getManifest()
-    next()
-  })
+    if (!req.hashManifest) req.hashManifest = getManifest();
+    next();
+  });
   app.use(express.static(`${__dirname}/public`));
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
