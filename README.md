@@ -1,31 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project of platzi courses 
 
 ## Available Scripts
 
 In the project directory, you can run:
+You create the .env (we add of example at .example.env)
 
-### `npm start`
+### `npm start:dev`
+
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:PORT](http://localhost:PORT) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `npm test`
-
-
-
+If you run of production you need to change de env of production and you run:
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+next you run: 
+### `node src/server`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Accessories:
+### `lint`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm install json-sever -g`
-### `json-server initialState.json`
 
